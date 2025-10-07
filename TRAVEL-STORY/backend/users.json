@@ -1,0 +1,37 @@
+[
+  {
+    "id": 3,
+    "fullName": "example",
+    "email": "example@example.com",
+    "password": "$2b$10$GwZy2RqUMmjntdaAAZfOOO2o1Z8tqOa8WVIQpELfpwKHVPIXO6NAm",
+     "createdAt": "2025-04-04T11:47:16.638Z"
+  },
+  {
+    "id": 4,
+    "fullName": "example1",
+    "email": "example1@gmail.com",
+    "password": "$2b$10$2xXhBEC8DO2uSNUuWhkYMetiDWeMeYPoIDhkpf1nZHb0LbkLRAm2m",
+     "createdAt": "2025-04-04T11:47:16.638Z" 
+  },
+  {
+    "id": 6,
+    "fullName": "gunn",
+    "email": "gunn@gmail.com",
+    "password": "$2b$10$cYp5dkjn2PDvBg.wa4UVAeeovZ1QvbStCGnlsPugNrJ3XISbXz/nG",
+     "createdAt": "2025-04-04T11:47:16.638Z"
+  },
+  {
+    "id": 8,
+    "fullName": "gunnu",
+    "email": "gunnu@gmail.com",
+    "password": "$2b$10$PGMr/mOY61YOIVJedv21yufwnQO8XCSQro3MpdD0z.ywOn3OyRpMu",
+     "createdAt": "2025-04-04T11:47:16.638Z"
+  },
+  {
+    "id": 5,
+    "fullName": "adwita",
+    "email": "adwita@adwita.com",
+    "password": "$2b$10$uN0m/XBnzXSx.2oZ2OLxmObxpOgFIKFIFkk9kuo.uk/9BsGzWrtmm",
+    "createdAt": "2025-05-05T11:47:16.638Z"
+  }
+]
