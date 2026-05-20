@@ -48,7 +48,7 @@ const Navbar = ({ userInfo, searchQuery, setSearchQuery, onSearchNote, handleCle
 const requestAccountDeletion = async () => {
   try {
     console.log("Sending deletion request...");
-    const response = await axios.post('http://localhost:8000/api/request-account-deletion', {}, {
+    const response = await axios.post('import.meta.env.VITE_API_URL/api/request-account-deletion', {}, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`
       }

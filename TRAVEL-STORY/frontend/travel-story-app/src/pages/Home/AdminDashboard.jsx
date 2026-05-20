@@ -65,7 +65,7 @@ const handleRequestAction = async (requestId, status) => {
     console.log(`Sending ${status} request for ID: ${requestId}`);
     
     // Use the full backend URL to bypass proxy issues
-    const response = await axios.put(`http://localhost:8000/admin/deletion-requests/${requestId}`, 
+    const response = await axios.put(`import.meta.env.VITE_API_URL/admin/deletion-requests/${requestId}`, 
       { status }, 
       {
         headers: {
@@ -93,7 +93,7 @@ const handleRequestAction = async (requestId, status) => {
   const fetchDeletionRequests = async () => {
     try {
       console.log("Fetching deletion requests...");
-      const response = await axios.get('http://localhost:8000/admin/deletion-requests', {
+      const response = await axios.get('import.meta.env.VITE_API_URL/admin/deletion-requests', {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
