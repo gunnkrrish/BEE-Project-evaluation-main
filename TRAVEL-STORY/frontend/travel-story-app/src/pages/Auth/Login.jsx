@@ -33,9 +33,7 @@ const Login = () => {
       console.log("Login response:", response.data);  // Debugging
   
       if (response.data) { 
-        // localStorage.setItem("token", response.data.accessToken);
-        // localStorage.setItem("userInfo", JSON.stringify(response.data.user)); // Store user info
-        // navigate("/dashboard");
+       
         localStorage.setItem("token", response.data.accessToken);
       localStorage.setItem("userInfo", JSON.stringify(response.data.user));
       

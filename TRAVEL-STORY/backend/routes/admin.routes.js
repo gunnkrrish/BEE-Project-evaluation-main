@@ -18,19 +18,17 @@ const isAdmin = async (req, res, next) => {
   }
 };
 
-// Get all users (admin only)
+
 
 router.get("/get-all-users", authenticateToken, isAdmin, async (req, res) => {
   try {
     const users = await User.find().select("-password");
     
-    // For each user, get their story count and storage used if not already in the user document
+    
     const usersWithStats = await Promise.all(
-      users.map(async (user) => {
+      users.map(async (user) =>{
         const userObj = user.toObject();
         
-        // Ensure date field is properly formatted
-        // Convert createdOn to createdAt for frontend consistency
         userObj.createdAt = user.createdOn ? user.createdOn.toISOString() : null;
         
         // If storiesCount is not already tracked in the user document
@@ -62,61 +60,21 @@ router.get("/get-all-users", authenticateToken, isAdmin, async (req, res) => {
 
 
 
-// router.get("/get-all-users", authenticateToken, isAdmin, async (req, res) => {
-//   try {
-//     const users = await User.find().select("-password");
-    
-//     // For each user, get their story count and storage used if not already in the user document
-//     const usersWithStats = await Promise.all(
-//       users.map(async (user) => {
-//         const userObj = user.toObject();
-        
-//         // If storiesCount is not already tracked in the user document
-//         if (userObj.storiesCount === undefined) {
-//           const storiesCount = await TravelStory.countDocuments({ userId: user._id });
-//           userObj.storiesCount = storiesCount;
-//         }
-        
-//         // If storageUsed is not already tracked in the user document
-//         if (userObj.storageUsed === undefined) {
-//           userObj.storageUsed = 0;
-//           const stories = await TravelStory.find({ userId: user._id });
-//           stories.forEach(story => {
-//             userObj.storageUsed += story.fileSize || 0;
-//           });
-//         }
-        
-//         return userObj;
-//       })
-//     );
-    
-//     res.status(200).json({ users: usersWithStats });
-//   } catch (error) {
-//     console.error("Error fetching users:", error);
-//     res.status(500).json({ error: true, message: error.message });
-//   }
-// });
 
-// Delete user (admin only)
+
+//Delete user (admin only)
 router.delete("/delete-user/:id", authenticateToken, isAdmin, async (req, res) => {
-  try {
+  try{
     const userId = req.params.id;
-    
-    // Check if user exists
     const user = await User.findById(userId);
-    if (!user) {
+    if (!user){
       return res.status(404).json({ error: true, message: "User not found" });
     }
-    
-    // Don't allow deletion of admin users
-    if (user.isAdmin) {
-      return res.status(400).json({ error: true, message: "Cannot delete admin users" });
+
+    if(user.isAdmin){
+      return res.status(400).json({error: true, message: "Cannot delete admin users" });
     }
-    
-    // Delete user's travel stories
     await TravelStory.deleteMany({ userId });
-    
-    // Delete the user
     await User.findByIdAndDelete(userId);
     
     res.status(200).json({ success: true, message: "User deleted successfully" });

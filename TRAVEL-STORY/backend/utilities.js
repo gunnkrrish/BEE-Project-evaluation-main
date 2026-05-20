@@ -1,11 +1,12 @@
 const jwt = require("jsonwebtoken");
 const fs = require("fs");
 const path = require("path");
-const User = require('./models/user.model'); // Import your User model
+const User = require('./models/user.model'); 
 function authenticateToken(req, res, next) {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
 
+  // this file is made so as to update and calculate file sizes that are missing
   // Check for guest token format
   if (token && token.startsWith('guest-token-')) {
     req.user = { 
@@ -112,22 +113,3 @@ module.exports = {
 
 
 
-// const jwt = require('jsonwebtoken')
-
-// function authenticateToken(req,res,next){
-//     const authHeader = req.headers["authorization"];
-//     const token = authHeader &&authHeader.split(" ")[1];
-
-//     //no token unauthorized
-//     if(!token) return res.sendStatus(401);
-
-//     jwt.verify(token,process.env.ACCESS_TOKEN_SECRET,(err,user)=>{
-//        if (err) return res.sendStatus(401);
-//        req.user = user;
-//        next();  
-//     });
-// }
-
-// module.exports = {
-//     authenticateToken
-// };

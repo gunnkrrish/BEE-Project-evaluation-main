@@ -1,4 +1,4 @@
 {
-    "connectionString":"mongodb+srv://gunnkhurana8:X3h2vMc7QKLtO26N@travelstory.5yqeiyk.mongodb.net/?retryWrites=true&w=majority&appName=travelstory"
+    "connectionString":"mongodb+srv://gunnkhurana8_db_user:travel@travel.p5ws9ee.mongodb.net/?appName=travel"
 }
 

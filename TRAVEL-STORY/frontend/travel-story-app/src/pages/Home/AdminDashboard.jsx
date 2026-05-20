@@ -12,7 +12,7 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../../components/input/Navbar";
-import Modal from "react-modal";
+import Modal from "react-modal"; // used for pop ups overlay
 import axios from 'axios';
 
 

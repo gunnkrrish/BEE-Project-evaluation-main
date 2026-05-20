@@ -4,6 +4,7 @@ const path = require("path");
 //Storage configuration
 const storage = multer.diskStorage({
     destination: function(req,file,cb){
+        // cb is a call back function
         cb(null,"./uploads/");  //destiantion folder fror storing uploaded files
     },
     filename: function(req,file,cb){
@@ -25,3 +26,7 @@ const fileFilter = (req,file,cb) => {
 const upload = multer({storage,fileFilter});
 
 module.exports = upload;
+
+
+// admin - admin@gmail.com admin@123
+//  sirf mongodb m jakr isadmin ko true krna hota hai

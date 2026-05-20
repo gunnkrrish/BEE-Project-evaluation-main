@@ -52,7 +52,7 @@ const Home = () => {
       if (storedUserInfo.isGuest) {
         setUserInfo(storedUserInfo);
         setIsGuest(true);
-        return; // Skip API call for guest users
+        return; 
       }
 
       const response = await axiosInstance.get("/get-user");

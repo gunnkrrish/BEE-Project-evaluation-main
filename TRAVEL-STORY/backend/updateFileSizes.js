@@ -2,6 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const mongoose = require('mongoose');
 
+// this file is to update db where missing filesize is there
+
 // Import JSON config file correctly
 const config = require('./config.json');
 
