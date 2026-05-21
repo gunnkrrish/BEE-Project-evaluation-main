@@ -14,6 +14,7 @@ const TravelStoryCard = ({
   onClick,
 }) => {
   // Construct the full image URL
+  console.log("IMG URL:", imgUrl);
   const imageUrl = imgUrl ? `${import.meta.env.VITE_API_URL}/${imgUrl}` : '';
 
   const handleImageError = (e) => {
