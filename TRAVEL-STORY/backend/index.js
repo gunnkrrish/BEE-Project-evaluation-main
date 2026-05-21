@@ -18,6 +18,7 @@ const DeletionRequest = require('./models/deletionRequest.model');
 
 const app = express();
 app.use(express.json());
+app.use("/uploads", express.static("uploads"));
 
 
 app.use(cors({ origin: "*" }));
@@ -249,7 +250,7 @@ app.post("/image-upload", upload.single("image"), async (req, res) => {
         .json({ error: true, message: "No image uploaded" });
     }
 
-    const imageUrl = `http://localhost:8000/uploads/${req.file.filename}`;
+    const imageUrl = `import.meta.env.VITE_API_URL/uploads/${req.file.filename}`;
     const fileSize = req.file.size; // Get the file size
 
     res.status(200).json({ imageUrl, fileSize }); // Return both URL and size
@@ -315,7 +316,7 @@ app.use("/uploads",express.static(path.join(__dirname,"uploads")));
     if(!travelStory){
       return res.status(404).json({error: true,message: "Travel story not found"});
     }
-    const placeholderImgUrl = `http://localhost:8000/assets/placeholder.png`;
+    const placeholderImgUrl = `import.meta.env.VITE_API_URL/assets/placeholder.png`;
 
     travelStory.title = title;
     travelStory.story = story;

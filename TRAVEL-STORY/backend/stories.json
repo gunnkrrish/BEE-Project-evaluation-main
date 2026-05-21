@@ -14,7 +14,7 @@
     "title": "test-story-01",
     "story": "trip to france",
     "visitedLocation": "Paris, France",
-    "imageUrl": "http://localhost:8000/uploads/1744213265648.jpeg",
+    "imageUrl": "import.meta.env.VITE_API_URL/uploads/1744213265648.jpeg",
     "visitedDate": "1970-01-01T00:00:02.024Z",
     "isFavourite": true
   }
