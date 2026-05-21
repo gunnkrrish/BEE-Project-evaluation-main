@@ -7,7 +7,6 @@ import axiosInstance from "../../utils/axiosInstance";
 import moment from "moment";
 import uploadImage from "../../utils/uploadImage";
 import { toast } from "react-toastify";
-import axios from "axios";
 const AddEditTravelStory = ({
   storyInfo,
   type,
@@ -162,7 +161,7 @@ const addNewTravelStory = async () => {
           imageUrl: "",
         };
         //updating story
-        const response=await axiosInstance.put(
+        const response=await axiosInstance.post(
           "/edit-story/"+storyId,
           postData
         );

@@ -25,7 +25,16 @@ const ImageSelector = ({ image, setImage , handleDeleteImg }) => {
   useEffect(()=>{
 // if the image prop is a string [Url], set it as the preview url
 if(typeof image==="string"){
-  setPreviewUrl(image);
+  // If it's an API path (like 'uploads/...'), prepend the API URL
+  if(image.startsWith('uploads/')){
+    setPreviewUrl(`${import.meta.env.VITE_API_URL}/${image}`);
+  } else if(image.startsWith('http')){
+    // If it's already a full URL, use it as is
+    setPreviewUrl(image);
+  } else {
+    // Otherwise prepend API URL
+    setPreviewUrl(`${import.meta.env.VITE_API_URL}/${image}`);
+  }
 } else if(image){
   // if the image prop is a file object, create a preview url
   setPreviewUrl(URL.createObjectURL(image));
@@ -35,7 +44,7 @@ if(typeof image==="string"){
 }
 
    return()=>{
-    if(previewUrl && typeof previewUrl === 'string' && !image){
+    if(previewUrl && typeof previewUrl === 'string' && !image && !previewUrl.startsWith('blob:')){
       URL.revokeObjectURL(previewUrl);
     }
    };

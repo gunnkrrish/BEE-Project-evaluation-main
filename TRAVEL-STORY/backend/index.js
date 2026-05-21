@@ -316,7 +316,7 @@ app.use("/uploads",express.static(path.join(__dirname,"uploads")));
     if(!travelStory){
       return res.status(404).json({error: true,message: "Travel story not found"});
     }
-    const placeholderImgUrl = `import.meta.env.VITE_API_URL/assets/placeholder.png`;
+    const placeholderImgUrl = `assets/placeholder.png`;
 
     travelStory.title = title;
     travelStory.story = story;
