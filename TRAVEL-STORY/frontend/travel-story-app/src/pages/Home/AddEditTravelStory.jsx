@@ -117,10 +117,16 @@ const addNewTravelStory = async () => {
     let imageUrl = "";
 
     if(storyImg) {
-      const imgUploadRes = await uploadImage(storyImg);
-      console.log("Image upload response:", imgUploadRes);
-      imageUrl = imgUploadRes.imageUrl || "";
-      console.log("Final imageUrl to send:", imageUrl);
+      try {
+        const imgUploadRes = await uploadImage(storyImg);
+        console.log("Image upload response:", imgUploadRes);
+        imageUrl = imgUploadRes.imageUrl || "";
+        console.log("Final imageUrl to send:", imageUrl);
+      } catch (uploadError) {
+        console.error("Image upload failed:", uploadError);
+        setError("Failed to upload image. Please try again.");
+        return;
+      }
     }
 
     const response = await axiosInstance.post("/add-travel-story",{

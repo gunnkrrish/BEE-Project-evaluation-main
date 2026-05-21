@@ -258,17 +258,36 @@ app.get("/get-all-stories", authenticateToken ,async (req,res)=>{
 
 app.post("/image-upload", upload.single("image"), async (req, res) => {
   try {
+    console.log("Image upload request received");
+    console.log("File details:", req.file ? {
+      filename: req.file.filename,
+      size: req.file.size,
+      mimetype: req.file.mimetype,
+      path: req.file.path
+    } : "No file");
+
     if (!req.file) {
+      console.error("No file in request");
       return res
         .status(400)
         .json({ error: true, message: "No image uploaded" });
     }
 
-    const imageUrl = `uploads/${req.file.filename}`;
-    const fileSize = req.file.size; // Get the file size
+    // Verify file actually exists and has content
+    if (req.file.size === 0) {
+      console.error("Uploaded file is empty");
+      return res
+        .status(400)
+        .json({ error: true, message: "Uploaded file is empty" });
+    }
 
-    res.status(200).json({ imageUrl, fileSize }); // Return both URL and size
+    const imageUrl = `uploads/${req.file.filename}`;
+    const fileSize = req.file.size;
+
+    console.log("Image uploaded successfully:", imageUrl);
+    res.status(200).json({ imageUrl, fileSize });
   } catch (error) {
+    console.error("Image upload error:", error);
     res.status(500).json({ error: true, message: error.message });
   }
 });
