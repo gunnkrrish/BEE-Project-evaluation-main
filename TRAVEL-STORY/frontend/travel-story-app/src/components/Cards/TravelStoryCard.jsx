@@ -15,10 +15,13 @@ const TravelStoryCard = ({
 }) => {
   console.log("visitedLocation prop:", visitedLocation, typeof visitedLocation);
 
+  // Construct the full image URL
+  const imageUrl = imgUrl ? `${import.meta.env.VITE_API_URL}/${imgUrl}` : '';
+
   return (
     <div className="border rounded-lg overflow-hidden bg-white hover:shadow-lg hover:shadow-slate-200 transition-all ease-in-out relative cursor-pointer">
       <img
-        src={`https://bee-project-evaluation-main.onrender.com/${imgUrl}`}
+        src={imageUrl}
         alt={title}
         className="w-full h-56 object-cover rounded-lg"
         onClick={onClick}

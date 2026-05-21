@@ -13,7 +13,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../../components/input/Navbar";
 import Modal from "react-modal"; // used for pop ups overlay
-import axios from 'axios';
 
 
 const AdminDashboard = () => {
@@ -64,14 +63,8 @@ const handleRequestAction = async (requestId, status) => {
   try {
     console.log(`Sending ${status} request for ID: ${requestId}`);
     
-    // Use the full backend URL to bypass proxy issues
-    const response = await axios.put(`import.meta.env.VITE_API_URL/admin/deletion-requests/${requestId}`, 
-      { status }, 
-      {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
-      }
+    const response = await axiosInstance.put(`/admin/deletion-requests/${requestId}`, 
+      { status }
     );
     
     console.log('Response:', response.data);
@@ -93,11 +86,7 @@ const handleRequestAction = async (requestId, status) => {
   const fetchDeletionRequests = async () => {
     try {
       console.log("Fetching deletion requests...");
-      const response = await axios.get('import.meta.env.VITE_API_URL/admin/deletion-requests', {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
-      });
+      const response = await axiosInstance.get('/admin/deletion-requests');
       console.log("Deletion requests response:", response.data);
       setDeletionRequests(response.data.requests || []);
       setRequestsLoading(false);

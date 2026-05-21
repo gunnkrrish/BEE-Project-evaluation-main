@@ -3,7 +3,7 @@ import LOGO from "../../assets/images/logo.png";
 import { useNavigate } from "react-router-dom";
 import ProfileInfo from "../Cards/ProfileInfo";
 import SearchBar from "./SearchBar";
-import axios from "axios";
+import axiosInstance from "../../utils/axiosInstance";
 
 const Navbar = ({ userInfo, searchQuery, setSearchQuery, onSearchNote, handleClearSearch }) => {
   const navigate = useNavigate();
@@ -48,11 +48,7 @@ const Navbar = ({ userInfo, searchQuery, setSearchQuery, onSearchNote, handleCle
 const requestAccountDeletion = async () => {
   try {
     console.log("Sending deletion request...");
-    const response = await axios.post('import.meta.env.VITE_API_URL/api/request-account-deletion', {}, {
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      }
-    });
+    const response = await axiosInstance.post('/api/request-account-deletion', {});
     
     alert(response.data.message || 'Account deletion request submitted successfully');
     setDropdownOpen(false);

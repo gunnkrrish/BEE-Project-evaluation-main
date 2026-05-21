@@ -250,7 +250,7 @@ app.post("/image-upload", upload.single("image"), async (req, res) => {
         .json({ error: true, message: "No image uploaded" });
     }
 
-    const imageUrl = `import.meta.env.VITE_API_URL/uploads/${req.file.filename}`;
+    const imageUrl = `uploads/${req.file.filename}`;
     const fileSize = req.file.size; // Get the file size
 
     res.status(200).json({ imageUrl, fileSize }); // Return both URL and size
