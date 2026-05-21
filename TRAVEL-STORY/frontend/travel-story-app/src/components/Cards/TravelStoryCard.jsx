@@ -13,10 +13,13 @@ const TravelStoryCard = ({
   onFavouriteClick,
   onClick,
 }) => {
-  console.log("visitedLocation prop:", visitedLocation, typeof visitedLocation);
-
   // Construct the full image URL
   const imageUrl = imgUrl ? `${import.meta.env.VITE_API_URL}/${imgUrl}` : '';
+
+  const handleImageError = (e) => {
+    console.error("Image failed to load:", imageUrl);
+    e.target.src = `${import.meta.env.VITE_API_URL}/assets/placeholder.png`;
+  };
 
   return (
     <div className="border rounded-lg overflow-hidden bg-white hover:shadow-lg hover:shadow-slate-200 transition-all ease-in-out relative cursor-pointer">
@@ -25,6 +28,7 @@ const TravelStoryCard = ({
         alt={title}
         className="w-full h-56 object-cover rounded-lg"
         onClick={onClick}
+        onError={handleImageError}
       />
       <button
         className="w-12 h-12 flex items-center justify-center bg-white/40 rounded-lg border-white/30 absolute top-4 right-4"

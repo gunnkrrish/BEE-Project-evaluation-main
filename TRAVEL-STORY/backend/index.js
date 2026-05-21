@@ -18,10 +18,24 @@ const DeletionRequest = require('./models/deletionRequest.model');
 
 const app = express();
 app.use(express.json());
-app.use("/uploads", express.static("uploads"));
 
+// Enable CORS for all requests including static files
+app.use(cors({ 
+  origin: "*",
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
-app.use(cors({ origin: "*" }));
+// Serve static files from uploads and assets directories
+app.use("/uploads", express.static(path.join(__dirname, "uploads"), {
+  maxAge: '1d',
+  etag: false
+}));
+app.use("/assets", express.static(path.join(__dirname, "assets"), {
+  maxAge: '7d',
+  etag: false
+}));
 
 app.use((err, req, res, next) => {
   console.error("Error:", err.message);
@@ -289,12 +303,7 @@ app.delete("/delete-image",async (req, res) => {
 });
 
 
-
-
-
-// //*Serve static files from the uploads and assests directory
-app.use("/uploads",express.static(path.join(__dirname,"uploads")));
- app.use("/assets",express.static(path.join(__dirname, "assets")));
+// Static file serving moved to top of file with express.static configuration
 
  //Edit travel story
  app.post("/edit-story/:id",authenticateToken,async(req,res)=>{

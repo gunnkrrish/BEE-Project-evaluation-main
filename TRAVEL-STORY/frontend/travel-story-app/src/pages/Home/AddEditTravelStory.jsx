@@ -118,7 +118,9 @@ const addNewTravelStory = async () => {
 
     if(storyImg) {
       const imgUploadRes = await uploadImage(storyImg);
+      console.log("Image upload response:", imgUploadRes);
       imageUrl = imgUploadRes.imageUrl || "";
+      console.log("Final imageUrl to send:", imageUrl);
     }
 
     const response = await axiosInstance.post("/add-travel-story",{
@@ -130,6 +132,7 @@ const addNewTravelStory = async () => {
       ? moment(visitedDate).valueOf()
       : moment().valueOf(),
     });
+    console.log("Story response:", response.data);
     if(response.data && response.data.story){
       toast.success("Story added successfully");
 
